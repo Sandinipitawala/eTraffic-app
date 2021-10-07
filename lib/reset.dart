@@ -13,6 +13,7 @@ class _ResetScreenState extends State<ResetScreen> {
   String _email = '';
   final auth = FirebaseAuth.instance;
 
+//navigate to login page when clicks reset button
   navigateToLogin() async {
     Navigator.push(context, MaterialPageRoute(builder: (context) => Login()));
   }
