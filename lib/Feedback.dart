@@ -45,6 +45,7 @@ homepage() async {
                 style: TextStyle(color: Colors.black, fontSize: 22.0,fontWeight:FontWeight.bold),)),
             ),
               SizedBox(height:30),
+              //giving ratings
               Rating((rating) {
                 setState(() {
                   _rating = rating;

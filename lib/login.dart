@@ -66,6 +66,7 @@ class _LoginState extends State<Login> {
               constraints: BoxConstraints.expand(),
                 decoration: BoxDecoration(
                     image: DecorationImage(
+                      //added background image
                         image: AssetImage("images/background.png"),
                         fit: BoxFit.cover)),   
           ),    

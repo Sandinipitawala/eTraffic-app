@@ -45,6 +45,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
     }
   }
 
+//navigate to login page when submitted
   navigateToLogin() async {
     Navigator.push(context, MaterialPageRoute(builder: (context) => Login()));
   }
