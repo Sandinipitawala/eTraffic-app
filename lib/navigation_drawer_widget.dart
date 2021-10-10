@@ -1,3 +1,4 @@
+import 'package:etraffic/Feedback.dart';
 import 'package:etraffic/page/change_password_page.dart';
 import 'package:etraffic/page/privacy_policy_page.dart';
 import 'package:etraffic/page/profile_page.dart';
@@ -7,7 +8,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:etraffic/google_sign_in.dart';
-import 'package:etraffic/Feedback.dart';
 
 class NavigationDrawerWidget extends StatelessWidget {
   final padding = EdgeInsets.symmetric(horizontal: 20);
@@ -71,10 +71,12 @@ class NavigationDrawerWidget extends StatelessWidget {
                   Divider(color: Colors.white70),
                   const SizedBox(height: 6),
                   buildMenuItem(
-                      text: 'User Feedback',
-                      icon: Icons.account_circle,
-                      onClicked: () => selectedItem(context, 5)),
-                  const SizedBox(height: 1),
+                    text: 'User Feedback', 
+                    icon: Icons.account_circle,
+                    onClicked: () => selectedItem(context, 5)),
+                  const SizedBox(height: 6),
+                  Divider(color: Colors.white70),
+                  const SizedBox(height: 6),
                   buildMenuItem(
                     text: 'Logout', 
                     icon: Icons.exit_to_app,

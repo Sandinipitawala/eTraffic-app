@@ -41,6 +41,7 @@ dependencies:
   firebase_storage: 10.0.3
   flutter_svg: ^0.22.0
   email_auth:
+  firebase_database: ^8.0.0
 
 dev_dependencies:
   flutter_test:
@@ -65,6 +66,12 @@ flutter:
      - images/back.jpg
      - images/background.png
      - images/back2.jpg
+     - images/1.jpg
+     - images/2.jpg
+     - images/3.jpg
+     - images/ima.png
+
+
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

@@ -28,12 +28,14 @@ class _StartState extends State<Start> {
     return SafeArea(
       child: Scaffold(
       body: Container(
-        constraints: BoxConstraints.expand(),
-                decoration: BoxDecoration(
-                    image: DecorationImage(
-                        image: AssetImage("images/background.png"),
-                        fit: BoxFit.cover)),        
+        // constraints: BoxConstraints.expand(),
+        //         decoration: BoxDecoration(
+        //             image: DecorationImage(
+        //                 image: AssetImage("images/3.jpg"),
+        //                 fit: BoxFit.cover)),        
         padding: EdgeInsets.fromLTRB(0, 30, 0, 0), 
+        alignment: Alignment.center,
+        color: Colors.lightBlue[50],
         child: Column(
           children: <Widget>[
             SizedBox(height: 20.0),
@@ -60,7 +62,7 @@ class _StartState extends State<Start> {
                           fontWeight: FontWeight.bold,
                           color: Colors.blue.shade900))
                 ])),
-            SizedBox(height: 5.0),
+            SizedBox(height: 20.0),
             Text(
               'You Report, We Decide',
               style: TextStyle(
