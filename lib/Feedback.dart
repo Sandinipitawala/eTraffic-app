@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:etraffic/rating.dart';
 import 'package:etraffic/homepage.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:path/path.dart';
+// import 'package:path/path.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -34,11 +34,11 @@ class _RatingPage extends State<RatingPage> {
                     .doc(user.uid)
                     .set({'comments': _comments}).then((value) => {
                           Fluttertoast.showToast(
-                              msg: "Feedback saved to device storage",
+                              msg: "Feedback recorded successfully",
                               backgroundColor: Colors.grey,
                               fontSize: 18),
-                          // Navigator.of(context).push(
-                          //     MaterialPageRoute(builder: (context) => HomePage()))
+                          Navigator.of(context).push(
+                              MaterialPageRoute(builder: (context) => HomePage()))
                         });
               } catch (onError) {
         Fluttertoast.showToast(
@@ -48,13 +48,6 @@ class _RatingPage extends State<RatingPage> {
       }
   }
 }
-
-// saveFeedback() async {
-//     Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage()));
-//   }
-
-
-
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -62,6 +55,7 @@ class _RatingPage extends State<RatingPage> {
           appBar: AppBar(
           title: Text('User Feedback'),
           centerTitle: true,
+          backgroundColor: Colors.blue.shade700,
           foregroundColor: Colors.white,
           backwardsCompatibility: false,
       ),
@@ -90,7 +84,12 @@ class _RatingPage extends State<RatingPage> {
                           style: TextStyle(fontSize: 18))
                       : SizedBox.shrink()),
               SizedBox(height:10),
-               Align(
+
+              Form(
+                key: _formKey,
+                child: Column(
+                  children: <Widget>[
+                    Align(
                         alignment: Alignment.centerLeft,
                         child: Padding(
                           padding: const EdgeInsets.only(left: 50.0, bottom: 8),
@@ -107,6 +106,10 @@ class _RatingPage extends State<RatingPage> {
                       Container(
                         padding: const EdgeInsets.fromLTRB(40, 10, 40, 15),
                         child: TextFormField(
+                          validator: (input) {
+                                if (input != null && input.isEmpty)
+                                  return 'Feedback cannot be empty';
+                              },
                           onSaved: (input) => _comments = input.toString(),
                           style: TextStyle(
                               fontSize: 19,
@@ -133,6 +136,9 @@ class _RatingPage extends State<RatingPage> {
                           ),
                         ),
                       ),
+                  ],
+                )
+              ),
             SizedBox(height:10),
              ElevatedButton(
                       onPressed:saveFeedback,
@@ -165,4 +171,3 @@ class _RatingPage extends State<RatingPage> {
   
   }
 }
-
