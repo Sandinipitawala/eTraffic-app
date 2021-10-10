@@ -74,13 +74,13 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
       ),
       body: Stack(
           children: <Widget>[
-            new Container(
-              constraints: BoxConstraints.expand(),
-                decoration: BoxDecoration(
-                    image: DecorationImage(
-                        image: AssetImage("images/background.png"),
-                        fit: BoxFit.cover)),   
-          ),    
+          //   new Container(
+          //     constraints: BoxConstraints.expand(),
+          //       decoration: BoxDecoration(
+          //           image: DecorationImage(
+          //               image: AssetImage("images/background.png"),
+          //               fit: BoxFit.cover)),   
+          // ),    
         SingleChildScrollView(
         child: Container(
           child: Column(

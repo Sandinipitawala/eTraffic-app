@@ -22,11 +22,11 @@ class _ResetScreenState extends State<ResetScreen> {
         body: Stack(
           children: <Widget>[
             new Container(
-              constraints: BoxConstraints.expand(),
-                decoration: BoxDecoration(
-                    image: DecorationImage(
-                        image: AssetImage("images/background.png"),
-                        fit: BoxFit.cover)),   
+              // constraints: BoxConstraints.expand(),
+              //   decoration: BoxDecoration(
+              //       image: DecorationImage(
+              //           image: AssetImage("images/background.png"),
+              //           fit: BoxFit.cover)),   
           ),    
         SingleChildScrollView(    
           child: Stack(children: [
@@ -93,7 +93,7 @@ class _ResetScreenState extends State<ResetScreen> {
                           style: TextStyle(
                             fontFamily: 'Product Sans',
                             fontSize: 15,
-                            color: Color(0xff8f9db5),
+                            color: Color(0xFF0E3311).withOpacity(0.7),
                           ),
                         ),
                       ),
@@ -200,8 +200,9 @@ class _ResetScreenState extends State<ResetScreen> {
         ),
         ]),
         ]),
-      // backgroundColor: Colors.lightBlue[50],
         ),
-    ]));
+    ]),
+    backgroundColor: Colors.lightBlue[50],
+    );
   }
 }

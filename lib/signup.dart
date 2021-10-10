@@ -1,4 +1,3 @@
-import 'dart:ffi';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:etraffic/google_sign_in.dart';
 import 'package:etraffic/homepage.dart';
@@ -111,11 +110,14 @@ class _SignUpState extends State<SignUp> {
         body: Stack(
           children: <Widget>[
             new Container(
-              constraints: BoxConstraints.expand(),
-                decoration: BoxDecoration(
-                    image: DecorationImage(
-                        image: AssetImage("images/background.png"),
-                        fit: BoxFit.cover)),   
+              // constraints: BoxConstraints.expand(),
+              //   decoration: BoxDecoration(
+              //       image: DecorationImage(
+              //           image: AssetImage("images/ima.png"),
+              //           colorFilter: 
+              //               ColorFilter.mode(Colors.black.withOpacity(0.8), 
+              //               BlendMode.dstATop),
+              //           fit: BoxFit.cover)),   
           ),    
           SingleChildScrollView(
           physics: BouncingScrollPhysics(),
@@ -635,7 +637,6 @@ class _SignUpState extends State<SignUp> {
         ),
           ]),
         backgroundColor: Colors.lightBlue[50],
-
     );
   }
 }

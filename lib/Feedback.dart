@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:etraffic/rating.dart';
 import 'package:etraffic/homepage.dart';
-
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:path/path.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter/material.dart';
 
 class RatingPage extends StatefulWidget {
   @override
@@ -9,11 +14,46 @@ class RatingPage extends StatefulWidget {
 }
 
 class _RatingPage extends State<RatingPage> {
-  int _rating = 1;
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final user = FirebaseAuth.instance.currentUser!;
+  FirebaseFirestore firestore = FirebaseFirestore.instance;
+  final FirebaseStorage storage =
+      FirebaseStorage.instanceFor(bucket: 'gs://etraffic-8ba4d.appspot.com');
+  final GlobalKey<NavigatorState> navigatorKey =
+      new GlobalKey<NavigatorState>();
 
-homepage() async {
-    Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage()));
+  int _rating = 1;
+  String _comments = '';
+
+  saveFeedback() async{
+      if (_formKey.currentState!.validate()) {
+          _formKey.currentState!.save();
+          try {
+                await firestore
+                    .collection('feedbacks')
+                    .doc(user.uid)
+                    .set({'comments': _comments}).then((value) => {
+                          Fluttertoast.showToast(
+                              msg: "Feedback saved to device storage",
+                              backgroundColor: Colors.grey,
+                              fontSize: 18),
+                          // Navigator.of(context).push(
+                          //     MaterialPageRoute(builder: (context) => HomePage()))
+                        });
+              } catch (onError) {
+        Fluttertoast.showToast(
+            msg: "ERROR: Unable to submit your feedback",
+            backgroundColor: Colors.grey,
+            fontSize: 18);
+      }
   }
+}
+
+// saveFeedback() async {
+//     Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage()));
+//   }
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -27,13 +67,6 @@ homepage() async {
       ),
         body: Stack(
           children: <Widget>[
-            new Container(
-              constraints: BoxConstraints.expand(),
-                decoration: BoxDecoration(
-                    image: DecorationImage(
-                        image: AssetImage("images/background.png"),
-                        fit: BoxFit.cover)),   
-          ),    
         SingleChildScrollView(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -41,7 +74,7 @@ homepage() async {
               SizedBox(height:15),
               Padding(
                 padding: const EdgeInsets.all(20.0),
-              child: Container(child: Text("Rate on how much are you satisfied with the eTraffic App?",
+              child: Container(child: Text("Rate on how much you are satisfied with the eTraffic App",
                 style: TextStyle(color: Colors.black, fontSize: 22.0,fontWeight:FontWeight.bold),)),
             ),
               SizedBox(height:30),
@@ -51,27 +84,58 @@ homepage() async {
                 });
               }, 5),
               SizedBox(
-                  height: 44,
+                  height: 60,
                   child: (_rating != null && _rating != 0)
                       ? Text("You selected $_rating rating",
                           style: TextStyle(fontSize: 18))
                       : SizedBox.shrink()),
               SizedBox(height:10),
-              Padding(
-                          padding: const EdgeInsets.all(25.0),
-                          child: Container(child: TextField(
-                            decoration: new InputDecoration(
-                              border: new OutlineInputBorder(
-                                  borderSide: new BorderSide(color: Colors.blueGrey)),
-                              hintText: 'Add Comment',
+               Align(
+                        alignment: Alignment.centerLeft,
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 50.0, bottom: 8),
+                          child: Text(
+                            'Add Comments/Suggestions',
+                            style: TextStyle(
+                              fontFamily: 'Product Sans',
+                              fontSize: 15,
+                              color: Color(0xff8f9db5),
                             ),
-                            style: TextStyle(height: 3.0),
-                          ),
                           ),
                         ),
+                      ),
+                      Container(
+                        padding: const EdgeInsets.fromLTRB(40, 10, 40, 15),
+                        child: TextFormField(
+                          onSaved: (input) => _comments = input.toString(),
+                          style: TextStyle(
+                              fontSize: 19,
+                              color: Color(0xff0962ff),
+                              fontWeight: FontWeight.bold),
+                          decoration: InputDecoration(
+                            hintText: 'Add comment',
+                            hintStyle: TextStyle(
+                                fontSize: 18,
+                                color: Colors.grey[350],
+                                fontWeight: FontWeight.w600),
+                            contentPadding: EdgeInsets.symmetric(
+                                vertical: 30, horizontal: 25),
+                            focusColor: Color(0xff0962ff),
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(20),
+                              borderSide: BorderSide(color: Color(0xff0962ff)),
+                            ),
+                            enabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(20),
+                                borderSide: BorderSide(
+                                  color: (Colors.grey[350])!,
+                                )),
+                          ),
+                        ),
+                      ),
             SizedBox(height:10),
              ElevatedButton(
-                      onPressed: homepage,
+                      onPressed:saveFeedback,
                       child: Text(
                         'Submit',
                         style: TextStyle(
@@ -95,6 +159,10 @@ homepage() async {
           ),
         )]
     ),
-  ),);
+            backgroundColor: Colors.lightBlue[50],
+  ),
+  );
+  
   }
 }
+

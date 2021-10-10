@@ -62,13 +62,13 @@ class _LoginState extends State<Login> {
     return Scaffold(
         body: Stack(
           children: <Widget>[
-            new Container(
-              constraints: BoxConstraints.expand(),
-                decoration: BoxDecoration(
-                    image: DecorationImage(
-                        image: AssetImage("images/background.png"),
-                        fit: BoxFit.cover)),   
-          ),    
+          //   new Container(
+          //     constraints: BoxConstraints.expand(),
+          //       decoration: BoxDecoration(
+          //           image: DecorationImage(
+          //               image: AssetImage("images/3.jpg"),
+          //               fit: BoxFit.cover)),   
+          // ),    
         SingleChildScrollView(
         child: Stack(children: [
           Positioned(
@@ -313,7 +313,8 @@ class _LoginState extends State<Login> {
           ),
         ]),
       ),
-      // backgroundColor: Colors.lightBlue[50],
-    ]));
+    ]),
+    backgroundColor: Colors.lightBlue[50],
+    );
   }
 }
